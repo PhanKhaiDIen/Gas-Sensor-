@@ -1,8 +1,9 @@
+require("dotenv").config();
+
 module.exports = {
     SERIAL_PATH: "COM1",
-
     TELEGRAM: {
-        BOT_TOKEN: "8002258732:AAGFHGrHt2xmUcGstwYXhrJwpKJaPSXIUZU",
-        CHAT_ID: "7163907045"
+        BOT_TOKEN: process.env.BOT_TOKEN,
+        CHAT_ID: process.env.CHAT_ID
     }
 };
