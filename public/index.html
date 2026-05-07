@@ -677,7 +677,31 @@
     <!-- HEADER -->
     <header>
         <div class="logo">⚡ <span>GAS</span>MONITOR <span>//</span> FIRE SAFETY SYSTEM</div>
-        <div class="clock">SYS // <span id="clockDisplay">00:00:00</span></div>
+        <div style="display:flex;align-items:center;gap:20px">
+            <div class="clock">SYS // <span id="clockDisplay">00:00:00</span></div>
+            <div style="width:1px;height:20px;background:rgba(0,212,255,0.15)"></div>
+            <div style="display:flex;align-items:center;gap:12px">
+                <span id="tg-badge" style="
+                    font-family:var(--font-mono);font-size:10px;
+                    padding:4px 10px;border-radius:4px;letter-spacing:1px;
+                    background:rgba(0,255,136,0.08);
+                    border:1px solid rgba(0,255,136,0.2);
+                    color:var(--green);display:none">✓ TG LINKED</span>
+                <span id="header-user" style="
+                    font-family:var(--font-mono);font-size:11px;
+                    color:var(--dim);letter-spacing:1px"></span>
+                <button onclick="doLogout()" style="
+                    background:transparent;
+                    border:1px solid rgba(255,65,105,0.3);
+                    color:rgba(255,65,105,0.7);
+                    font-family:var(--font-hud);font-size:9px;
+                    letter-spacing:2px;padding:6px 12px;
+                    border-radius:4px;cursor:pointer;
+                    transition:all 0.2s"
+                    onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)';this.style.boxShadow='0 0 12px rgba(255,65,105,0.2)'"
+                    onmouseout="this.style.borderColor='rgba(255,65,105,0.3)';this.style.color='rgba(255,65,105,0.7)';this.style.boxShadow='none'">LOGOUT</button>
+            </div>
+        </div>
     </header>
 
     <!-- ALERT BANNER -->
@@ -910,6 +934,31 @@
     </div><!-- /grid -->
 
     <script>
+        // ═══════════════════════════════════════
+        //  AUTH GUARD
+        // ═══════════════════════════════════════
+        let FA_TOKEN = localStorage.getItem('fa_token');
+
+        (async () => {
+            if (!FA_TOKEN) { window.location.href = 'login.html'; return; }
+            try {
+                const res = await fetch('/api/me', { headers: { Authorization: 'Bearer ' + FA_TOKEN } });
+                if (!res.ok) { localStorage.removeItem('fa_token'); window.location.href = 'login.html'; return; }
+                const user = await res.json();
+                document.getElementById('header-user').textContent = user.email || user.name;
+                if (user.verified) document.getElementById('tg-badge').style.display = 'inline-block';
+            } catch (_) {
+                localStorage.removeItem('fa_token');
+                window.location.href = 'login.html';
+            }
+        })();
+
+        function doLogout() {
+            fetch('/api/logout', { method: 'POST', headers: { Authorization: 'Bearer ' + FA_TOKEN } }).catch(() => { });
+            localStorage.removeItem('fa_token');
+            window.location.href = 'login.html';
+        }
+
         // ═══════════════════════════════════════
         //  STATE
         // ═══════════════════════════════════════
