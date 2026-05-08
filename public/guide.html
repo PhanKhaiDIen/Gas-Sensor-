@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUIDE — Fire Safety System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="register.css"> <!-- Dùng chung CSS để đồng bộ giao diện -->
+    <style>
+        .guide-list { list-style: none; padding: 0; margin-top: 20px; }
+        .guide-step { 
+            background: rgba(0, 212, 255, 0.03);
+            border-left: 3px solid var(--cyan);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+        .step-num-circle {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--cyan);
+            color: var(--bg);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-family: var(--font-hud);
+        }
+        .highlight { color: var(--gold); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">⚡ <span>GAS</span>MONITOR <span>//</span> GUIDE SYSTEM</div>
+    </header>
+
+    <div class="main">
+        <div class="wrap" style="max-width: 650px;">
+            <div class="form-panel">
+                <div class="form-header">
+                    <div class="form-eyebrow">// TELEGRAM SETUP GUIDE</div>
+                    <div class="form-title">HƯỚNG DẪN KẾT NỐI</div>
+                </div>
+
+                <div class="guide-list">
+                    <div class="guide-step">
+                        <span class="step-num-circle">1</span>
+                        Tải ứng dụng <span class="highlight">Telegram</span> về điện thoại hoặc máy tính và tiến hành đăng nhập tài khoản.
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num-circle">2</span>
+                        Tại thanh tìm kiếm, nhập và chọn bot chính thức của Telegram có tên là <span class="highlight">@BotFather</span>.
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num-circle">3</span>
+                        Thực hiện theo hướng dẫn của BotFather để thiết lập bot nhận tin:
+                        <ul style="margin-top: 10px; color: var(--dim); font-size: 13px; line-height: 1.6;">
+                            <li>• Đặt tên (Name): <span class="highlight">Hệ Thống Cảnh Báo Gas-Fire</span></li>
+                            <li>• Đặt Username: <span class="highlight">He_Thong_Bao_Gas_Fire_bot</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+                    <p style="font-size: 12px; color: var(--dim); margin-bottom: 15px;">
+                        // Sau khi thiết lập xong, hãy quay lại và đăng nhập để nhận mã liên kết.
+                    </p>
+                    <a href="login.html" class="btn-submit" style="text-decoration: none;">
+                        <span>◀ QUAY LẠI ĐĂNG NHẬP</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>FIRE SAFETY SYSTEM // v2.0 // DOCUMENTATION</footer>
+</body>
+</html>

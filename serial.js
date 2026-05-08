@@ -23,14 +23,33 @@ function initSerial(onData) {
         line = line.trim();
         if (!line) return;
 
-        const match = /G:([\d.]+),T:([\d.]+),S:(\d+)/.exec(line);
-        if (!match) return;
+        // HIỆN DỮ LIỆU THÔ ĐỂ DUY KIỂM TRA TRONG TERMINAL
+        console.log("[RAW FROM PROTEUS]:", line); 
 
-        onData({
-            gas: parseFloat(match[1]),
-            temp: parseFloat(match[2]),
-            status: parseInt(match[3])
-        });
+        // Regex khớp với định dạng: GAS: 748 | TEMP: 39.1 C
+        const match = /GAS:\s*(\d+)\s*\|\s*TEMP:\s*([\d.]+)/.exec(line);
+        
+        if (match) {
+            const gasValue = parseFloat(match[1]);
+            const tempValue = parseFloat(match[2]);
+
+            // Tính toán Status dựa trên logic cảm biến của Duy
+            let currentStatus = 0;
+            if (tempValue >= 50.0) {
+                currentStatus = 3; // Cháy (Fire)
+            } else if (gasValue >= 700) {
+                currentStatus = 2; // Nguy hiểm (Gas Danger)
+            } else if (gasValue >= 300) {
+                currentStatus = 1; // Cảnh báo (Gas Warning)
+            }
+
+            // Gửi dữ liệu về server.js
+            onData({
+                gas: gasValue,
+                temp: tempValue,
+                status: currentStatus
+            });
+        }
     });
 
     return port;

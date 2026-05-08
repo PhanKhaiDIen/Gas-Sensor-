@@ -1,1 +1,19 @@
+# 1. Bảo mật thông tin (Secrets)
 .env
+config.js  # Nếu Duy để Token trực tiếp trong này
+
+# 2. Thư viện và file tạm (Dependencies & Cache)
+node_modules/
+dist/
+build/
+.npm/
+*.log
+
+# 3. Cấu hình cá nhân (Editor & OS)
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 4. Lưu ý riêng cho Database (Nếu Duy muốn up schema riêng)
+# fire_alert.sql
